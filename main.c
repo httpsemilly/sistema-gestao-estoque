@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h> // biblioteca para funções de alocação de memória e controle de processos etc
 #include <string.h> // biblioteca para manipulação de strings
+#include <locale.h>
 
 int main() {
+	setlocale (LC_ALL, "portuguese");
+	
     // comando para abrir o documento csv e armazená-lo na variável "arquivo"
 	FILE* arquivo = fopen("sistemaestoque.csv", "a+");
 
