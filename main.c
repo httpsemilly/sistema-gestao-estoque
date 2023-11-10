@@ -10,27 +10,36 @@ int main() {
 	FILE* arquivo = fopen("sistemaestoque.csv", "a+");
 
     // variáveis para armazenar dados dos produtos
-	char nomeProduto[50], tipoProduto[50], fornecedor[50];
+	char nomeProduto[50], tipoProduto[50], fornecedor[50], linha[50]; // array "linha" armazena temporariamente as strings que o user digita
 	int quantidadeDisponivel; 
 	double precoUnitario;
 
     // tratamento de erro, caso o arquivo não seja encontrado
 	if (!arquivo) {
-			printf("Não foi possível abrir o arquivo!\n");
-			return 0;
+		printf("Não foi possível abrir o arquivo!\n");
+		return 0;
 	}
 
     // comandos para pegar input do user e armazenar os dados dos produtos
 	printf("\nInforme o nome do produto: ");
-	scanf("%[^\n]%*c", &nomeProduto);
-	printf("\nInforme a quantidade disponível: ");
-	scanf("%d", &quantidadeDisponivel);
-	printf("\nInforme o preço unitário: ");
-	scanf("%lf", &precoUnitario);
-	printf("\nInforme o tipo de produto: ");
-	scanf("%s", &tipoProduto);
-	printf("\nInforme o fornecedor: ");
-	scanf("%s", &fornecedor);
+	fgets(linha, sizeof(linha), stdin);
+    	sscanf(linha, "%49[^\n]", nomeProduto);
+
+    	printf("\nInforme a quantidade disponível: ");
+    	fgets(linha, sizeof(linha), stdin);
+    	sscanf(linha, "%d", &quantidadeDisponivel);
+
+    	printf("\nInforme o preço unitário: ");
+    	fgets(linha, sizeof(linha), stdin);
+    	sscanf(linha, "%lf", &precoUnitario);
+
+    	printf("\nInforme o tipo de produto: ");
+    	fgets(linha, sizeof(linha), stdin);
+    	sscanf(linha, "%49[^\n]", tipoProduto);
+
+    	printf("\nInforme o fornecedor: ");
+    	fgets(linha, sizeof(linha), stdin);
+    	sscanf(linha, "%49[^\n]", fornecedor);
 
     // comando para passar os dados inseridos para o arquivo csv
 	fprintf(arquivo, "%s, %d, %lf, %s, %s\n", nomeProduto, quantidadeDisponivel, precoUnitario, tipoProduto, fornecedor);
